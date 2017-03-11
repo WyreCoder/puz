@@ -50,38 +50,39 @@ public class FindTheObject extends AppCompatActivity {
         // Object to find:
         final Button objectBtn = (Button) findViewById(R.id.objectBtn);
         objectBtn.setOnClickListener(itemFound());
-        ConstraintLayout.LayoutParams objLP = new ConstraintLayout.LayoutParams(
-                objW,
-                objH);
-        objLP.setMargins(objPosX, objPosY, 0, 0); // Set position
-        objectBtn.setLayoutParams(objLP);
+//        ConstraintLayout.LayoutParams objLP = new ConstraintLayout.LayoutParams(
+//                objW,
+//                objH);
+//        objLP.setMargins(objPosX, objPosY, 0, 0); // Set position
+//        objectBtn.setLayoutParams(objLP);
 
         // Give up button:
         final Button giveUpBtn = (Button) findViewById(R.id.giveUpBtn);
-        ConstraintLayout.LayoutParams guLP = new ConstraintLayout.LayoutParams(
-                ConstraintLayout.LayoutParams.WRAP_CONTENT,
-                ConstraintLayout.LayoutParams.WRAP_CONTENT);
-        guLP.setMargins(148, 163, 0, 0); // Set position
-        giveUpBtn.setLayoutParams(guLP);
+//        ConstraintLayout.LayoutParams guLP = new ConstraintLayout.LayoutParams(
+//                ConstraintLayout.LayoutParams.WRAP_CONTENT,
+//                ConstraintLayout.LayoutParams.WRAP_CONTENT);
+//        guLP.setMargins(148, 163, 0, 0); // Set position
+//        giveUpBtn.setLayoutParams(guLP);
         giveUpBtn.setOnClickListener(giveUp());
 
         // Question text field:
         final TextView questionTxt = (TextView) findViewById(R.id.questionTxt);
-        ConstraintLayout.LayoutParams txtLP = new ConstraintLayout.LayoutParams(
-                ConstraintLayout.LayoutParams.WRAP_CONTENT,
-                ConstraintLayout.LayoutParams.WRAP_CONTENT);
-        guLP.setMargins(38, 405, 0, 0); // Set position
-        questionTxt.setLayoutParams(txtLP);
+//        ConstraintLayout.LayoutParams txtLP = new ConstraintLayout.LayoutParams(
+//                ConstraintLayout.LayoutParams.WRAP_CONTENT,
+//                ConstraintLayout.LayoutParams.WRAP_CONTENT);
+//        guLP.setMargins(38, 405, 0, 0); // Set position
+//        questionTxt.setLayoutParams(txtLP);
         questionTxt.setText(questionText);
 
         // Background image:
         final ImageView bgImg = (ImageView) findViewById(R.id.bgImg);
-        bgImg.setImageBitmap(img);
-         ConstraintLayout.LayoutParams imgLP = new ConstraintLayout.LayoutParams(
-                ConstraintLayout.LayoutParams.WRAP_CONTENT,
-                 ConstraintLayout.LayoutParams.WRAP_CONTENT);
-         imgLP.setMargins(imgPosX, imgPosY, 0, 0); // Set position
-         bgImg.setLayoutParams(imgLP);
+        //bgImg.setImageBitmap(img);
+
+//         ConstraintLayout.LayoutParams imgLP = new ConstraintLayout.LayoutParams(
+//                ConstraintLayout.LayoutParams.WRAP_CONTENT,
+//                 ConstraintLayout.LayoutParams.WRAP_CONTENT);
+//         imgLP.setMargins(imgPosX, imgPosY, 0, 0); // Set position
+//         bgImg.setLayoutParams(imgLP);
     }
 
     @Nullable
