@@ -22,15 +22,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MenuActivity"
-            android:parentActivityName=".LoginActivity" />
-        <activity
             android:name=".MainActivity"
-            android:parentActivityName=".MenuActivity" />
+            android:parentActivityName=".Menu" />
         <activity
             android:name=".Riddle"
             android:parentActivityName=".MainActivity" />
         <activity android:name=".TextRiddle" />
+        <activity android:name=".Menu"></activity>
     </application>
 
 </manifest>
