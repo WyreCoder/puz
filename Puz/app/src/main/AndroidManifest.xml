@@ -16,7 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Riddle"></activity>
+        <activity android:name=".Riddle"
+            android:parentActivityName=".MainActivity"></activity>
     </application>
 
 </manifest>
