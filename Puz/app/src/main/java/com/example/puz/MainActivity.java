@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /** Called when the user taps Hint 1 button*/
-    public void sendMessage(View view) {
+    public void showRiddle(View view) {
         Intent intent = new Intent(this, Riddle.class);
         startActivity(intent);
 

@@ -5,4 +5,5 @@
     <string name="r3">Riddle 3</string>
     <string name="riddle">Enter your answer</string>
     <string name="question">Question 1</string>
+    <string name="submit">Submit</string>
 </resources>
