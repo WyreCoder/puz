@@ -33,8 +33,7 @@ public class TextRiddle extends AppCompatActivity {
     public void checkAnswer(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         EditText answer = (EditText) findViewById(R.id.editText2);
-        ArrayList<String> a = new ArrayList<>();
-        a.add("lala");
+
         if(answers.contains(answer.getText().toString())){
             Toast toast = Toast.makeText(TextRiddle.this, "GOOD ANSWER", Toast.LENGTH_SHORT);
             toast.show();
