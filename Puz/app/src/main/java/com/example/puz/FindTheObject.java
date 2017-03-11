@@ -1,5 +1,6 @@
 package com.example.puz;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -39,11 +41,9 @@ public class FindTheObject extends AppCompatActivity {
 
         // Object to find:
         final Button objectBtn = (Button) findViewById(R.id.objectBtn);
-        objectBtn.setOnClickListener(itemFound());
 
         // Give up button:
         final Button giveUpBtn = (Button) findViewById(R.id.giveUpBtn);
-        giveUpBtn.setOnClickListener(giveUp());
 
         // Question text field:
         final TextView questionTxt = (TextView) findViewById(R.id.questionTxt);
@@ -72,17 +72,21 @@ public class FindTheObject extends AppCompatActivity {
         }.execute();
     }
 
-    @Nullable
-    private View.OnClickListener giveUp() {
-        System.out.print("give up clicked\n");
-        return null;
+    public void itemFound(View view) {
+        // Send response to server-  positive
+        returnToMap("You found it!");
     }
 
-    @Nullable
-    private View.OnClickListener itemFound() {
-        System.out.print("item found\n");
-        return null;
+    public void giveUp(View view) {
+        // Send response to server-  negative
+        returnToMap("Too bad.");
     }
 
+    private void returnToMap(String msg) {
+        Intent intent = new Intent(this, MainActivity.class);
+        Toast toast = Toast.makeText(FindTheObject.this, msg, Toast.LENGTH_SHORT);
+        toast.show();
+        startActivity(intent);
+    }
 }
 
