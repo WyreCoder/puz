@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Challenges</title>
+		<link rel="stylesheet" href="https://unpkg.com/tachyons@4.6.1/css/tachyons.min.css"/>
+	</head>
+	<body>
+		<header class="bg-black-90 w-100 ph3 pv3 pv4-ns ph4-m ph5-l">
+			<nav class="f6 fw6 ttu tracked">
+				<span class="white">PUZ Developer Console</span>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a class="link dim white dib mr3" href="#" title="Home">Challenges</a>
+			</nav>
+		</header>
+		<table class="w-90 center mv3 collapse ba br2 b--black-10 pv2 ph3">
+			<thead>
+				<tr class="striped--light-gray">
+					<th class="pv2 ph3 tl f6 fw6 ttu">ID</th>
+					<th class="pv2 ph3 tl f6 fw6 ttu">Type</th>
+					<th class="pv2 ph3 tl f6 fw6 ttu">Points</th>
+					<th class="pv2 ph3 tl f6 fw6 ttu">Latitude</th>
+					<th class="pv2 ph3 tl f6 fw6 ttu">Longitude</th></tr>
+			</thead>
+			<tbody>
+<% challenges.each do | c | %>
+				<tr>
+					<td class="pv2 ph3"><%= c['id'] %></td>
+					<td class="pv2 ph3"><%= c['type'] %></td>
+					<td class="pv2 ph3"><%= c['points'] %></td>
+					<td class="pv2 ph3"><%= c['latitude'] %></td>
+					<td class="pv2 ph3"><%= c['longitude'] %></td>
+				</tr>
+				<tr>
+					<td colspan=4 class="pv2 ph3 tc">
+						<code><%= c['meta'] %></code>
+					</td>
+				</tr>
+<% end %>
+			</tbody>
+		</table>
+
+
+		<h2 class="w-90 center">Create New Riddle</h2>
+		<form action="/dev/challenges/riddle" method="post">
+			<table class="w-90 center mv3 collapse ba br2 b--black-10 pv2 ph3">
+				<thead>
+					<tr class="striped--light-gray">
+						<th class="pv2 ph3 tl f6 fw6 ttu">Key</th>
+						<th class="pv2 ph3 tl f6 fw6 ttu">Value</th></tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="pv2 ph3">Latitude</td>
+						<td class="pv2 ph3"><input class="input-reset ba pa1 f6 w-100" type="text" name="latitude" /></td>
+					</tr>
+					<tr>
+						<td class="pv2 ph3">Longitude</td>
+						<td class="pv2 ph3"><input class="input-reset ba pa1 f6 w-100" type="text" name="longitude" /></td>
+					</tr>
+					<tr>
+						<td class="pv2 ph3">XP Value</td>
+						<td class="pv2 ph3"><input class="input-reset ba pa1 f6 w-100" type="text" name="points" /></td>
+					</tr>
+					<tr>
+						<td class="pv2 ph3">Question</td>
+						<td class="pv2 ph3"><input class="input-reset ba pa1 f6 w-100" type="text" name="question" /></td>
+					</tr>
+					<tr>
+						<td class="pv2 ph3">Answers (separate with a semi-colon)</td>
+						<td class="pv2 ph3"><input class="input-reset ba pa1 f6 w-100" type="text" name="answers" /></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td class="pv2 ph3">
+							<input type="submit" class="f5 no-underline black bg-animate inline-flex items-center pa3 pv3 ba border-box mr4 pointer bg-white hover-bg-black hover-white" value="Create" />
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+	</body>
+</html>

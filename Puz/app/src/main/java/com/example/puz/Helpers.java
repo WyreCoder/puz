@@ -1,8 +1,19 @@
 package com.example.puz;
 
-/**
- * Created by jamie on 11/03/2017.
- */
-
 public class Helpers {
+    public static void setTimeout(Runnable runnable, int delay){
+        final Runnable run = runnable;
+        final int del = delay;
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(del);
+                    run.run();
+                } catch (Exception exc) {
+                    System.err.println(exc);
+                }
+            }
+        }.start();
+    }
 }

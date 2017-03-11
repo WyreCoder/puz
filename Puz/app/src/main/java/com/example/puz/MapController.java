@@ -1,6 +1,7 @@
 package com.example.puz;
 
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -28,6 +29,7 @@ public class MapController {
     private static int USER_RADIUS = 5;
 
     private static MapController instance = null;
+
     private MapsActivity activity = null;
     private GoogleMap map = null;
 
@@ -89,6 +91,9 @@ public class MapController {
         Challenge challenge = position.getChallenge();
 
         Log.d("tag", "Received challenge: " + challenge.getQuestion());
+
+        Intent intent = challenge.getIntent(getActivity());
+        getActivity().startActivity(intent);
     }
 
     public void refreshMarkers () {
