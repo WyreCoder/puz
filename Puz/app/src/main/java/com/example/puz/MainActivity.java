@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 
 import java.util.ArrayList;
 
@@ -39,5 +38,13 @@ public class MainActivity extends AppCompatActivity {
         intent.putStringArrayListExtra(EXTRA_MESSAGE2, answers);
         startActivity(intent);
 
+    }
+
+    /**
+     * Response to clicking Challenge 2 button
+     * */
+    public void sendCoffeeShopMessage(View view) {
+        Intent intent = new Intent(this, FindTheObject.class);
+        startActivity(intent);
     }
 }

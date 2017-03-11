@@ -45,6 +45,9 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
+        <activity android:name=".Riddle"
+            android:parentActivityName=".MainActivity"></activity>
+        <activity android:name=".FindTheObject" android:parentActivityName=".MainActivity"></activity>
     </application>
 
 </manifest>
