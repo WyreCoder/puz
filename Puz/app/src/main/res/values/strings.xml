@@ -1,10 +1,12 @@
 <resources>
     <string name="app_name">Puz</string>
-    <string name="r1">Riddle 1</string>
-    <string name="r2">Riddle 2</string>
+    <string name="r1">Chocolate</string>
+    <string name="r2">Coffee Shop</string>
     <string name="r3">Riddle 3</string>
     <string name="riddle">Enter your answer</string>
     <string name="title_activity_maps">Map</string>
     <string name="question">Question 1</string>
     <string name="submit">Submit</string>
+    <string name="coffee_question">Find the coffee cup!</string>
+    <string name="give_up">Give up</string>
 </resources>
