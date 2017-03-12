@@ -12,8 +12,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -70,13 +72,17 @@ public class FindTheObject extends AppCompatActivity {
         // Object to find:
         final Button objectBtn = (Button) findViewById(R.id.objectBtn);
 
-        Log.d("tag", "" + objectBtn.getX());
-        Log.d("tag", "" + objectBtn.getY());
         Resources r = getResources();
         float pxW = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, objW, r.getDisplayMetrics());
         float pxH = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, objH, r.getDisplayMetrics());
-        objectBtn.setWidth((int)pxW);
-        objectBtn.setHeight((int)pxH);
+
+        Log.d("tag", "w " + pxW + "," + objW);
+        Log.d("tag", "h " + pxH + "," + objH);
+
+        ViewGroup.LayoutParams params = objectBtn.getLayoutParams();
+        params.width = (int) pxW;
+        params.height = (int) pxH;
+        objectBtn.setLayoutParams(params);
         objectBtn.setX(objPosX - 283);
         objectBtn.setY(objPosY - 304);
 
