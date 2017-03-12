@@ -28,7 +28,7 @@
 
     <Button
         android:id="@+id/objectBtn"
-        style="@android:style/Widget.DeviceDefault.Button.Borderless"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="26dp"
         android:layout_height="29dp"
         android:layout_marginBottom="8dp"
