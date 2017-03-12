@@ -24,6 +24,7 @@ class CoffeeChallenge extends Challenge {
         intent.putExtra("question", this.getQuestion());
         intent.putExtra("image_url", this.getURL());
         intent.putExtra("object", this.data);
+        intent.putExtra("challenge_id", Integer.parseInt(this.getPosition().getId()));
         intent.putExtra("challenge", (Serializable) this);
 
         return intent;

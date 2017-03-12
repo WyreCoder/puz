@@ -12,6 +12,8 @@ class Challenge implements Serializable {
     public ArrayList<String> list;
     public MapPosition position;
 
+    public boolean complete = false;
+
     public Challenge (String question, ArrayList<String> answers) {
         this.question = question;
         list = answers;
@@ -34,6 +36,14 @@ class Challenge implements Serializable {
 
     public boolean isCorrect (String answer) {
         return list.contains(answer.toLowerCase());
+    }
+
+    public void setIsComplete (boolean complete) {
+        this.complete = complete;
+    }
+
+    public boolean isComplete () {
+        return this.complete;
     }
 
     public Intent getIntent (Activity activity) {

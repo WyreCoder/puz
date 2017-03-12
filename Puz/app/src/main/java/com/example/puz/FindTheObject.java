@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -16,19 +17,41 @@ import android.widget.Toast;
 
 import java.io.InputStream;
 import java.net.URL;
+import java.util.List;
 
+import com.android.volley.Response;
 import com.example.puz.R;
+import com.google.android.gms.maps.model.LatLng;
 
 public class FindTheObject extends AppCompatActivity {
 
     private Bitmap bmp;
 
+    private Challenge challenge;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_click_challenge);
-
         Intent intent = getIntent();
+
+        challenge = (Challenge) intent.getSerializableExtra("challenge");
+
+        switch (intent.getIntExtra("challenge_id", 1)) {
+            /* case 5:
+                setContentView(R.layout.activity_click_test_1);
+                break;
+            case 4:
+                setContentView(R.layout.activity_click_test_2);
+                break;
+            case 6:
+                setContentView(R.layout.activity_click_test_3);
+                break; */
+            default:
+            case 3:
+                setContentView(R.layout.activity_click_challenge);
+                break;
+        }
+
 
         // Obtain server data:
         String questionText = intent.getStringExtra("question");
@@ -45,6 +68,12 @@ public class FindTheObject extends AppCompatActivity {
 
         // Object to find:
         final Button objectBtn = (Button) findViewById(R.id.objectBtn);
+
+        Log.d("tag", "" + objectBtn.getX());
+        Log.d("tag", "" + objectBtn.getY());
+
+        objectBtn.setX(objPosX - 283);
+        objectBtn.setY(objPosY - 304);
 
         // Give up button:
         final Button giveUpBtn = (Button) findViewById(R.id.giveUpBtn);
@@ -78,19 +107,31 @@ public class FindTheObject extends AppCompatActivity {
 
     public void itemFound(View view) {
         // Send response to server-  positive
-        returnToMap("You found it!");
+        returnToMap(true);
     }
 
     public void giveUp(View view) {
         // Send response to server-  negative
-        returnToMap("Too bad.");
+        returnToMap(false);
     }
 
-    private void returnToMap(String msg) {
+    private void returnToMap(boolean success) {
         Intent intent = new Intent(this, MainActivity.class);
-        Toast toast = Toast.makeText(FindTheObject.this, msg, Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(FindTheObject.this, success ? "You found it!" : "Too bad.", Toast.LENGTH_SHORT);
         toast.show();
-        finish();
+
+        Log.d("tag", "Done? " + (success ? "1":"0"));
+        final FindTheObject that = this;
+        API api = API.getInstance();
+        api.completeChallenge(this.challenge, new Response.Listener<Integer>() {
+            @Override
+            public void onResponse(Integer score) {
+                Log.d("tag", "GOT THE RESPONSE :-)");
+                Log.d("tag", "My score is " + score);
+                // LOAD TEH MARKERS
+                that.finish();
+            }
+        });
     }
 }
 

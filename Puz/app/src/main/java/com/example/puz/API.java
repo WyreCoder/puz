@@ -78,6 +78,7 @@ public class API {
 
                             Log.d("tag", item.getString("question"));
                             challenge = new Challenge(item.getString("question"), answers);
+                            challenge.setIsComplete(item.getBoolean("complete"));
 
                         } else if (item.getString("type").equals("COFFEE")) {
                             Log.d("tag", "Have a COFFEE");
@@ -89,6 +90,7 @@ public class API {
                             }
 
                             challenge = new CoffeeChallenge(item.getString("question"), item.getString("image_url"), data);
+                            challenge.setIsComplete(item.getBoolean("complete"));
                         }
                         if (challenge != null) {
                             positions.add(new MapPosition(String.valueOf(item.getInt("challenge_id")), item.getDouble("latitude"), item.getDouble("longitude"), challenge));
@@ -100,6 +102,35 @@ public class API {
                 }
 
                 calls.onResponse(positions);
+            }
+        });
+
+    }
+
+    public void completeChallenge (Challenge challenge, Response.Listener<Integer> callback) {
+
+        final Response.Listener<Integer> calls = callback;
+        HashMap<String, String> data = new HashMap<String, String>();
+        data.put("challenge_id", challenge.getPosition().getId());
+        post("/challenge/complete", data, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                List<MapPosition> positions = new LinkedList<MapPosition>();
+
+                int score = 0;
+                int pointsEarned = 0;
+                try {
+                    Log.d("tag", response);
+                    JSONObject json = new JSONObject(response);
+
+                    score = json.getInt("score");
+                    pointsEarned = json.getInt("delta");
+
+                } catch (JSONException e) {
+                    Log.e("tag", e.getMessage());
+                }
+
+                calls.onResponse(Integer.valueOf(score));
             }
         });
 
