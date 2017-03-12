@@ -84,11 +84,26 @@ public class MapController {
         refreshMarkers(location);
     }
 
+    public boolean canAccessMarker(Marker myMarker, MapPosition position) {
+        float[] dist = new float[2];
+        Location.distanceBetween(position.getLat(), position.getLng(), myRadius.getCenter().latitude, myRadius.getCenter().longitude, dist);
+        return dist[0] <= myRadius.getRadius();
+
+    }
+
     public void onMarkerClick (Marker myMarker) {
         MapMarker marker = (MapMarker) myMarker.getTag();
         MapPosition position = marker.getMapPosition();
 
         Log.d("tag", "Clicked " + position.getId());
+
+        // Check logic for
+        if (!canAccessMarker(myMarker, position)) {
+            Log.d("tag", "User should not view this tag");
+            return;
+        }
+
+
         Challenge challenge = position.getChallenge();
 
         Log.d("tag", "Received challenge: " + challenge.getQuestion());

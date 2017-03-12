@@ -30,7 +30,6 @@ import com.google.android.gms.maps.model.LatLng;
 public class FindTheObject extends AppCompatActivity {
 
     private Bitmap bmp;
-
     private Challenge challenge;
 
     @Override

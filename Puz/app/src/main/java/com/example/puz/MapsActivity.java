@@ -10,6 +10,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -30,6 +31,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private MapController controller;
 
     private static Location location = null;
+    // private static LatLng fakeLatLng = null;
+
+    private static LatLng fakeLatLng = new LatLng(51.525587, -0.139724);
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -66,7 +70,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Add a marker in Sydney and move the camera
         controller = MapController.getInstance(this);
         disableMapFeatures();
-        requestLocation();
+
+        if(fakeLatLng != null) {
+            onLocationChanged(fakeLatLng, false);
+        } else {
+            requestLocation();
+        }
+
 
     }
 
@@ -83,12 +93,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LocationManager lMan = (LocationManager) getSystemService(LOCATION_SERVICE);
         Criteria c = new Criteria();
         String best = lMan.getBestProvider(c, true);
+
         final Location location = MapsActivity.location != null ? MapsActivity.location : lMan.getLastKnownLocation(best);
 
         if (location != null) {
             onLocationChanged(location, false);
         }
         lMan.requestLocationUpdates(best, 500, 0, this);
+
+
 
     }
 
@@ -113,25 +126,45 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         onLocationChanged(location, true);
     }
     public void onLocationChanged(Location location, boolean animate) {
-
         MapsActivity.location = location;
         double lat = location.getLatitude();
         double lng = location.getLongitude();
 
         LatLng ll = new LatLng(lat, lng);
+        onLocationChanged(ll, animate);
+    }
+
+    public void onLocationChanged(LatLng ll, boolean animate) {
+
         if (animate) {
             mMap.animateCamera(CameraUpdateFactory.zoomTo(17));
+            mMap.animateCamera(CameraUpdateFactory.newLatLng(ll));
         } else {
             mMap.moveCamera(CameraUpdateFactory.zoomTo(17));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(ll));
         }
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(ll));
-        Log.d("tag", "Lat: " + lat + ", Lng:" + lng);
-
         controller.onLocationChanged(ll);
 
     }
 
+
     @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (fakeLatLng == null) {
+            return super.onKeyUp(keyCode, event);
+        }
+        Log.d("tag", "PRESSED KEY");
+        switch(keyCode) {
+            case KeyEvent.KEYCODE_SPACE:
+                fakeLatLng = new LatLng(51.524905377006185, -0.13824105262756348);
+                onLocationChanged(fakeLatLng, true);
+                return true;
+            default:
+                return super.onKeyUp(keyCode, event);
+        }
+    }
+
+        @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
         // TODO
     }
