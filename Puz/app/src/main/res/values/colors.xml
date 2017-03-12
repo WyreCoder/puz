@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3f51b5</color>
+    <color name="colorPrimary">#37cdf2</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#303F9F</color> //FF4081
+    <color name="button_color">#ff0f0f</color>
+    <color name="themeapp">#ff0f0f</color>
+
+    <color name="sa_green">#ff0f0f</color>
+    <color name="stacked_green">#97e08f</color>
+    <color name="accent_green">#97e08f</color>
 </resources>
