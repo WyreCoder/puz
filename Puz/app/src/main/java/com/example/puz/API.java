@@ -149,6 +149,36 @@ public class API {
 
     }
 
+    public void loadLeaders (Response.Listener<Leaderboard> callback) {
+
+        final Response.Listener<Leaderboard> calls = callback;
+        get2("/leaderboard", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                Leaderboard lb = new Leaderboard();
+
+                try {
+                    Log.d("tag", response);
+
+                    JSONObject json = new JSONObject(response);
+                    JSONArray items = json.getJSONArray("scores");
+                    for (int i = 0; i < items.length(); i++) {
+                        JSONObject item = (JSONObject) items.get(i);
+                        lb.add(item.getInt("id"), item.getString("username"), item.getInt("score"));
+                    }
+
+                } catch (JSONException e) {
+                    Log.e("tag", e.getMessage());
+                }
+
+                calls.onResponse(lb);
+
+            }
+        });
+
+    }
+
     // get2 doesn't send the Authorization header, get does
     protected void get2 (String url, Response.Listener<String> callback) {
         url = BASE_URL + url;
