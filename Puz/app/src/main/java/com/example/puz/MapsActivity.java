@@ -29,6 +29,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private MapController controller;
 
+    private static Location location = null;
+
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,11 +83,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LocationManager lMan = (LocationManager) getSystemService(LOCATION_SERVICE);
         Criteria c = new Criteria();
         String best = lMan.getBestProvider(c, true);
-        Location location = lMan.getLastKnownLocation(best);
+        final Location location = MapsActivity.location != null ? MapsActivity.location : lMan.getLastKnownLocation(best);
+
         if (location != null) {
-           onLocationChanged(location);
+            onLocationChanged(location, false);
         }
-        lMan.requestLocationUpdates(best, 5000, 0, this);
+        lMan.requestLocationUpdates(best, 500, 0, this);
 
     }
 
@@ -107,13 +110,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onLocationChanged(Location location) {
+        onLocationChanged(location, true);
+    }
+    public void onLocationChanged(Location location, boolean animate) {
 
+        MapsActivity.location = location;
         double lat = location.getLatitude();
         double lng = location.getLongitude();
 
         LatLng ll = new LatLng(lat, lng);
+        if (animate) {
+            mMap.animateCamera(CameraUpdateFactory.zoomTo(17));
+        } else {
+            mMap.moveCamera(CameraUpdateFactory.zoomTo(17));
+        }
         mMap.moveCamera(CameraUpdateFactory.newLatLng(ll));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(17));
         Log.d("tag", "Lat: " + lat + ", Lng:" + lng);
 
         controller.onLocationChanged(ll);
@@ -160,4 +171,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapClick(LatLng latlng) {
         Log.d("tag", "clicked " + latlng.latitude + ", " + latlng.longitude);
     }
+
+
+
 }

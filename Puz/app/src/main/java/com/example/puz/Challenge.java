@@ -1,29 +1,50 @@
 package com.example.puz;
 
-import java.util.LinkedList;
-import java.util.List;
+import android.app.Activity;
+import android.content.Intent;
 
-class Challenge {
+import java.io.Serializable;
+import java.util.ArrayList;
 
-    public List<String> list;
+class Challenge implements Serializable {
 
-    public Challenge () {
-        list = new LinkedList<String>();
-        list.add("answer");
-        list.add("answer2");
-        list.add("answer3");
+    public String question;
+    public ArrayList<String> list;
+    public MapPosition position;
+
+    public Challenge (String question, ArrayList<String> answers) {
+        this.question = question;
+        list = answers;
     }
 
     public String getQuestion () {
-        return "question!";
+        return question;
     }
 
-    public List<String> getAnswers () {
+    public void setPosition (MapPosition position) {
+        this.position = position;
+    }
+    public MapPosition getPosition () {
+        return this.position;
+    }
+
+    public ArrayList<String> getAnswers () {
         return list;
     }
 
     public boolean isCorrect (String answer) {
         return list.contains(answer.toLowerCase());
+    }
+
+    public Intent getIntent (Activity activity) {
+
+        Intent intent = new Intent(activity, TextRiddle.class);
+        intent.putExtra("message", this.getQuestion());
+        intent.putStringArrayListExtra("message2", this.getAnswers());
+        intent.putExtra("challenge", (Serializable) this);
+
+        return intent;
+
     }
 
 

@@ -1,6 +1,7 @@
 package com.example.puz;
 
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -8,6 +9,7 @@ import android.location.Location;
 import android.util.Log;
 import android.view.View;
 
+import com.android.volley.Response;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -28,6 +30,7 @@ public class MapController {
     private static int USER_RADIUS = 5;
 
     private static MapController instance = null;
+
     private MapsActivity activity = null;
     private GoogleMap map = null;
 
@@ -78,7 +81,7 @@ public class MapController {
         myRadius.setCenter(location);
         myLocation.setCenter(location);
 
-        refreshMarkers();
+        refreshMarkers(location);
     }
 
     public void onMarkerClick (Marker myMarker) {
@@ -89,9 +92,12 @@ public class MapController {
         Challenge challenge = position.getChallenge();
 
         Log.d("tag", "Received challenge: " + challenge.getQuestion());
+
+        Intent intent = challenge.getIntent(getActivity());
+        getActivity().startActivityForResult(intent, 0);
     }
 
-    public void refreshMarkers () {
+    public void refreshMarkers (LatLng location) {
 
         List<String> deletable = new LinkedList<String>();
 
@@ -107,21 +113,28 @@ public class MapController {
             markers.remove(id);
         }
 
-        Challenge challengeA = new Challenge();
-        Challenge challengeB = new Challenge();
+        //List<MapPosition> positions = new LinkedList<MapPosition>();
+        //positions.add(new MapPosition("id1", 51.52491476401518, -0.1402553915977478, challengeA));
+        //positions.add(new MapPosition("id2", 51.52624019025365, -0.13907320797443387, challengeB));
 
-        List<MapPosition> positions = new LinkedList<MapPosition>();
-        positions.add(new MapPosition("id1", 51.52491476401518, -0.1402553915977478, challengeA));
-        positions.add(new MapPosition("id2", 51.52624019025365, -0.13907320797443387, challengeB));
+        API api = API.getInstance();
 
-        // LOAD TEH MARKERS
-        for (MapPosition position : positions) {
-            if (markers.containsKey(position.getId())) {
-                continue;
+        api.getChallenges(location, new Response.Listener<List<MapPosition>>() {
+            @Override
+            public void onResponse(List<MapPosition> positions) {
+                Log.d("tag", "GOT THE RESPONSE :-)");
+                // LOAD TEH MARKERS
+                for (MapPosition position : positions) {
+                    if (markers.containsKey(position.getId())) {
+                        continue;
+                    }
+                    MapMarker newMarker = new MapMarker(map, new LatLng(position.getLat(), position.getLng()), position);
+                    markers.put(position.getId(), newMarker);
+                }
             }
-            MapMarker newMarker = new MapMarker(map, new LatLng(position.getLat(), position.getLng()), position);
-            markers.put(position.getId(), newMarker);
-        }
+        });
+
+
 
     }
 

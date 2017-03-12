@@ -1,6 +1,10 @@
 package com.example.puz;
 
-public class MapPosition {
+import android.util.Log;
+
+import java.io.Serializable;
+
+public class MapPosition implements Serializable {
 
     private String id;
     private double lat, lng;
@@ -11,6 +15,8 @@ public class MapPosition {
         this.lat = lat;
         this.lng = lng;
         this.challenge = challenge;
+        this.challenge.setPosition(this);
+        Log.d("tag", "Creating new challenge: " + id + ", " + lat + ", " + lng);
     }
 
     public String getId () {

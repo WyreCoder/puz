@@ -28,16 +28,20 @@ public class FindTheObject extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_click_challenge);
 
+        Intent intent = getIntent();
+
         // Obtain server data:
-        String questionText = "Find the coffee cup";
+        String questionText = intent.getStringExtra("question");
         // Obtain URL form server:
-        final String url = "https://www.google.co.uk/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwiLvICKz8_SAhXJUBQKHcChA_EQjRwIBw&url=http%3A%2F%2Fwww.amsterdam.info%2Fcoffeeshops%2Fbaba%2F&psig=AFQjCNHPzIGOc70ojZWukmmQjrfvueT36Q&ust=1489361718069266";
+        final String url = intent.getStringExtra("image_url");
+
+        int[] integer = intent.getIntArrayExtra("object");
 
         // Obtain object's dims and pos:
-        int objW = 23;
-        int objH = 16;
-        int objPosX = 283;
-        int objPosY = 304;
+        int objW = integer[0];
+        int objH = integer[1];
+        int objPosX = integer[2];
+        int objPosY = integer[3];
 
         // Object to find:
         final Button objectBtn = (Button) findViewById(R.id.objectBtn);
@@ -86,7 +90,7 @@ public class FindTheObject extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         Toast toast = Toast.makeText(FindTheObject.this, msg, Toast.LENGTH_SHORT);
         toast.show();
-        startActivity(intent);
+        finish();
     }
 }
 

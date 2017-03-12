@@ -31,13 +31,14 @@ public class TextRiddle extends AppCompatActivity {
 
     /** Called when the user taps Hint 1 button*/
     public void checkAnswer(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, MapsActivity.class);
         EditText answer = (EditText) findViewById(R.id.editText2);
 
         if(answers.contains(answer.getText().toString())){
             Toast toast = Toast.makeText(TextRiddle.this, "GOOD ANSWER", Toast.LENGTH_SHORT);
             toast.show();
-            startActivity(intent);
+            finish();
+            //startActivity(intent);
         }
         else if(answer.getText().toString().length()==0){
             Toast toast = Toast.makeText(TextRiddle.this, "TYPE AN ANSWER", Toast.LENGTH_SHORT);
