@@ -175,6 +175,25 @@ post '/dev/challenges/riddle' do
 	redirect to('/dev/challenges')
 end
 
+post '/dev/challenges/riddle2' do
+	latitude, longitude = Float(params[:latitude]), Float(params[:longitude]) rescue halt!('Bad input')
+
+	points = Integer(params[:points])
+	question = params[:question]
+	image_url = params[:image_url]
+	answers = params[:answers].split ';'
+	type = 'RIDDLE2'
+
+	raise 'Need a question' if question.empty?
+	raise 'Need at least one answer' if answers.length == 0
+
+	json = { 'question' => question, 'image_url' => image_url, 'answers' => answers }.to_json
+	query('INSERT INTO `challenges` (type, meta, geom, points) VALUES (?, ?, POINT(?, ?), ?);', 
+		type, json, latitude, longitude, points)
+
+	redirect to('/dev/challenges')
+end
+
 post '/dev/challenges/coffee' do
 	latitude, longitude = Float(params[:latitude]), Float(params[:longitude]) rescue halt!('Bad input')
 

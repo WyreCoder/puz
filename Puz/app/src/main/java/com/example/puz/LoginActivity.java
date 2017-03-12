@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * TODO: remove after connecting to a real authentication system.
      */
     private static String[] DUMMY_CREDENTIALS = new String[]{
-            "emman@gmail.com:emman", "chloeh@gmail.com:chloeh", "jaimew@gmail.com:jaimew",
+            "emman@gmail.com:emman", "chloeh@gmail.com:chloeh", "no@no.no:nonono",
             "kingab@gmail.com:kingab"
     };
     /**
