@@ -31,7 +31,7 @@ public class FindTheObject extends AppCompatActivity {
         // Obtain server data:
         String questionText = "Find the coffee cup";
         // Obtain URL form server:
-        final String url = "";
+        final String url = "https://www.google.co.uk/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwiLvICKz8_SAhXJUBQKHcChA_EQjRwIBw&url=http%3A%2F%2Fwww.amsterdam.info%2Fcoffeeshops%2Fbaba%2F&psig=AFQjCNHPzIGOc70ojZWukmmQjrfvueT36Q&ust=1489361718069266";
 
         // Obtain object's dims and pos:
         int objW = 23;
