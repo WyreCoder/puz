@@ -147,7 +147,8 @@ public class MapController {
             marker = map.addMarker(new MarkerOptions()
                 .position(position)
                 .title("TREASURE"));
-            Bitmap icon = BitmapFactory.decodeResource(Application.getAppContext().getResources(), R.drawable.marker);
+            boolean complete = mapPosition.getChallenge().isComplete();
+            Bitmap icon = BitmapFactory.decodeResource(Application.getAppContext().getResources(), complete ? R.drawable.marker_done : R.drawable.marker);
             Bitmap resized = Bitmap.createScaledBitmap(icon, 48, 48, false);
 
             marker.setTag(this);
