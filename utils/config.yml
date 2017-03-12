@@ -1,0 +1,6 @@
+database:
+    mysql2:
+        host: 127.0.0.1
+        username: puz
+        password: ut1l # you probably want something more secure than that
+        database: puz
