@@ -175,6 +175,23 @@ post '/dev/challenges/riddle' do
 	redirect to('/dev/challenges')
 end
 
+post '/dev/challenges/coffee' do
+	latitude, longitude = Float(params[:latitude]), Float(params[:longitude]) rescue halt!('Bad input')
+
+	points = Integer(params[:points])
+	question = params[:question]
+	image_url = params[:image_url]
+	object = [Integer(params[:obj_width]), Integer(params[:obj_height]), Integer(params[:obj_x]), Integer(params[:obj_y])]
+
+	type = 'COFFEE'
+
+	json = { 'question' => question, 'image_url' => image_url, 'object' => object }.to_json
+	query('INSERT INTO `challenges` (type, meta, geom, points) VALUES (?, ?, POINT(?, ?), ?);', 
+		type, json, latitude, longitude, points)
+
+	redirect to('/dev/challenges')
+end
+
 
 
 

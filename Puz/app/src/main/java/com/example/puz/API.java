@@ -66,22 +66,33 @@ public class API {
                     for (int i = 0; i < items.length(); i++) {
                         JSONObject item = (JSONObject) items.get(i);
 
+                        Challenge challenge = null;
+                        if (item.getString("type").equals("RIDDLE")) {
 
-                        if (!item.getString("type").equals("RIDDLE")) {
-                            Log.d("tag", "Received something strange");
-                            continue;
+                            Log.d("tag", "Have a RIDDLE");
+                            JSONArray answerJSON = item.getJSONArray("answers");
+                            ArrayList<String> answers = new ArrayList<String>();
+                            for (int j = 0; j < answerJSON.length(); j++) {
+                                answers.add(answerJSON.getString(j));
+                            }
+
+                            Log.d("tag", item.getString("question"));
+                            challenge = new Challenge(item.getString("question"), answers);
+
+                        } else if (item.getString("type").equals("COFFEE")) {
+                            Log.d("tag", "Have a COFFEE");
+
+                            int[] data = new int[4];
+                            JSONArray answerJSON = item.getJSONArray("object");
+                            for (int j = 0; j < answerJSON.length(); j++) {
+                                data[j] = answerJSON.getInt(j);
+                            }
+
+                            challenge = new CoffeeChallenge(item.getString("question"), item.getString("image_url"), data);
                         }
-
-                        Log.d("tag", "herro there");
-                        JSONArray answerJSON = item.getJSONArray("answers");
-                        ArrayList<String> answers = new ArrayList<String>();
-                        for (int j = 0; j < answerJSON.length(); j++) {
-                            answers.add(answerJSON.getString(j));
+                        if (challenge != null) {
+                            positions.add(new MapPosition(String.valueOf(item.getInt("challenge_id")), item.getDouble("latitude"), item.getDouble("longitude"), challenge));
                         }
-
-                        Log.d("tag", item.getString("question"));
-                        Challenge challenge = new Challenge(item.getString("question"), answers);
-                        positions.add(new MapPosition(String.valueOf(item.getInt("challenge_id")), item.getDouble("latitude"), item.getDouble("longitude"), challenge));
 
                     }
                 } catch (JSONException e) {

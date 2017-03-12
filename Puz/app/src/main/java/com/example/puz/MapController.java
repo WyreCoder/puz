@@ -94,7 +94,7 @@ public class MapController {
         Log.d("tag", "Received challenge: " + challenge.getQuestion());
 
         Intent intent = challenge.getIntent(getActivity());
-        getActivity().startActivity(intent);
+        getActivity().startActivityForResult(intent, 0);
     }
 
     public void refreshMarkers (LatLng location) {

@@ -16,7 +16,7 @@ public class Menu extends AppCompatActivity {
 
 
     public void play(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, MapsActivity.class);
         startActivity(intent);
     }
 }
