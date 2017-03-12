@@ -1,6 +1,6 @@
-<resources xmlns:android="http://schemas.android.com/tools">
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
 
-    <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -8,4 +8,6 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:buttonStyle">@style/Base.Widget.AppCompat.Button.Colored</item>
     </style>
+
+
 </resources>
