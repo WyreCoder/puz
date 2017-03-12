@@ -54,7 +54,6 @@ public class FindTheObject extends AppCompatActivity {
                 break;
         }
 
-
         // Obtain server data:
         String questionText = intent.getStringExtra("question");
         // Obtain URL form server:
