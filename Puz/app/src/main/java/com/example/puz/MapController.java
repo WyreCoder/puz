@@ -141,7 +141,13 @@ public class MapController {
                 // LOAD TEH MARKERS
                 for (MapPosition position : positions) {
                     if (markers.containsKey(position.getId())) {
-                        continue;
+                        boolean c1 = position.getChallenge().isComplete();
+                        boolean c2 = markers.get(position.getId()).getMapPosition().getChallenge().isComplete();
+                        if (c1 != c2) {
+                            markers.get(position.getId()).destroy();
+                        } else {
+                            continue;
+                        }
                     }
                     MapMarker newMarker = new MapMarker(map, new LatLng(position.getLat(), position.getLng()), position);
                     markers.put(position.getId(), newMarker);

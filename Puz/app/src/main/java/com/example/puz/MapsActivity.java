@@ -154,14 +154,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             return super.onKeyUp(keyCode, event);
         }
         Log.d("tag", "PRESSED KEY");
+        double delta = 0.0001;
         switch(keyCode) {
+            case KeyEvent.KEYCODE_A:
+                fakeLatLng = new LatLng(fakeLatLng.latitude, fakeLatLng.longitude - delta);
+                break;
+            case KeyEvent.KEYCODE_D:
+                fakeLatLng = new LatLng(fakeLatLng.latitude, fakeLatLng.longitude + delta);
+                break;
+            case KeyEvent.KEYCODE_S:
+                fakeLatLng = new LatLng(fakeLatLng.latitude - delta, fakeLatLng.longitude);
+                break;
+            case KeyEvent.KEYCODE_W:
+                fakeLatLng = new LatLng(fakeLatLng.latitude + delta, fakeLatLng.longitude);
+                break;
             case KeyEvent.KEYCODE_SPACE:
                 fakeLatLng = new LatLng(51.524905377006185, -0.13824105262756348);
-                onLocationChanged(fakeLatLng, true);
-                return true;
+                break;
             default:
                 return super.onKeyUp(keyCode, event);
         }
+        onLocationChanged(fakeLatLng, true);
+        return true;
     }
 
         @Override

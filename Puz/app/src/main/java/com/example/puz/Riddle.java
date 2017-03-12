@@ -1,13 +1,16 @@
 package com.example.puz;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -36,8 +39,18 @@ public class Riddle extends AppCompatActivity {
         final String url = intent.getStringExtra("image_url");
         challenge = (Challenge) intent.getSerializableExtra("challenge");
 
-        TextView textView = (TextView) findViewById(R.id.textView);
+        final TextView textView = (TextView) findViewById(R.id.textView);
         textView.setText(message);
+
+        textView.post(new Runnable() {
+            @Override
+            public void run() {
+                int height = textView.getLineCount() * textView.getLineHeight() + 10;
+                ViewGroup.LayoutParams layout = textView.getLayoutParams();
+                layout.height = (int) height;
+                textView.setLayoutParams(layout);
+            }
+        });
 
         final ImageView bgImg = (ImageView) findViewById(R.id.bgImg);
         new AsyncTask<Void, Void, Void>() {

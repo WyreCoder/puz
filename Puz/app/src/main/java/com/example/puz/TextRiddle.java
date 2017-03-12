@@ -5,7 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,8 +32,19 @@ public class TextRiddle extends AppCompatActivity {
         challenge = (Challenge) intent.getSerializableExtra("challenge");
 
         // Capture the layout's TextView and set the string as its text
-        TextView textView = (TextView) findViewById(R.id.textView);
+        final TextView textView = (TextView) findViewById(R.id.textView);
         textView.setText(message);
+
+        textView.post(new Runnable() {
+            @Override
+            public void run() {
+                int height = textView.getLineCount() * textView.getLineHeight() + 10;
+                ViewGroup.LayoutParams layout = textView.getLayoutParams();
+                layout.height = (int) height;
+                textView.setLayoutParams(layout);
+            }
+        });
+
     }
 
     /** Called when the user taps Hint 1 button*/
