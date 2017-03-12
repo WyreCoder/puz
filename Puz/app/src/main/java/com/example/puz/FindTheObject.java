@@ -1,6 +1,7 @@
 package com.example.puz;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -9,6 +10,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -71,7 +73,11 @@ public class FindTheObject extends AppCompatActivity {
 
         Log.d("tag", "" + objectBtn.getX());
         Log.d("tag", "" + objectBtn.getY());
-
+        Resources r = getResources();
+        float pxW = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, objW, r.getDisplayMetrics());
+        float pxH = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, objH, r.getDisplayMetrics());
+        objectBtn.setWidth((int)pxW);
+        objectBtn.setHeight((int)pxH);
         objectBtn.setX(objPosX - 283);
         objectBtn.setY(objPosY - 304);
 
