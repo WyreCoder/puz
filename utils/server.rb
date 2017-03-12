@@ -9,7 +9,7 @@ require 'yaml'
 require './challenge_helper'
 
 $config = YAML::load(File.read('config.yml'))
-
+set :bind, '0.0.0.0'
 
 get '/' do
 	json({
@@ -66,9 +66,8 @@ get '/api/v1/search' do
 			X(geom) AS latitude, Y(geom) AS longitude FROM `challenges` c 
 		LEFT JOIN `user_challenges` u
 		ON c.id = u.challenge_id
-		WHERE (u.user_id IS NULL OR u.user_id=?) AND
-		MBRContains(envelope(linestring(point(( ? +(2/111)), ( ? +(2/111))), point(( ? -(2/111)), ( ? -(2/111))))), geom)',
-		user['id'], latitude, longitude, latitude, longitude, latitude, longitude)
+		WHERE MBRContains(envelope(linestring(point(( ? +(2/111)), ( ? +(2/111))), point(( ? -(2/111)), ( ? -(2/111))))), geom)',
+		latitude, longitude, latitude, longitude, latitude, longitude)
 
 
 	res.map! { | row | {
@@ -77,7 +76,7 @@ get '/api/v1/search' do
 		'complete' => row['completed'] ? true : false,
 		'latitude' => row['latitude'],
 		'longitude' => row['longitude'],
-		'distance' => row['distance_in_meters'] } }
+		'distance' => row['distance_in_meters'] }.merge(JSON.parse(row['meta'])) }
 
 	json({
 		'latitude' => latitude,
@@ -189,7 +188,7 @@ end
 
 def authorize!
 
-	token = request.env['HTTP_AUTHORIZATION'][6..-1]
+	token = 'thisisatesttoken' # request.env['HTTP_AUTHORIZATION'][6..-1]
 	res = query('SELECT * FROM `users` WHERE token=?;', token)
 	halt!('Bad credentials', 403) if res.length != 1
 

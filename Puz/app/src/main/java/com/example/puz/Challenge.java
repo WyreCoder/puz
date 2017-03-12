@@ -8,17 +8,24 @@ import java.util.ArrayList;
 
 class Challenge implements Serializable {
 
+    public String question;
     public ArrayList<String> list;
+    public MapPosition position;
 
-    public Challenge () {
-        list = new ArrayList<String>();
-        list.add("answer");
-        list.add("answer2");
-        list.add("answer3");
+    public Challenge (String question, ArrayList<String> answers) {
+        this.question = question;
+        list = answers;
     }
 
     public String getQuestion () {
-        return "question!";
+        return question;
+    }
+
+    public void setPosition (MapPosition position) {
+        this.position = position;
+    }
+    public MapPosition getPosition () {
+        return this.position;
     }
 
     public ArrayList<String> getAnswers () {
