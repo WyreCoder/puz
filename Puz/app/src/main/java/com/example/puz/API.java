@@ -80,6 +80,19 @@ public class API {
                             challenge = new Challenge(item.getString("question"), answers);
                             challenge.setIsComplete(item.getBoolean("complete"));
 
+                        } else if (item.getString("type").equals("RIDDLE2")) {
+
+                            Log.d("tag", "Have a RIDDLE2");
+                            JSONArray answerJSON = item.getJSONArray("answers");
+                            ArrayList<String> answers = new ArrayList<String>();
+                            for (int j = 0; j < answerJSON.length(); j++) {
+                                answers.add(answerJSON.getString(j));
+                            }
+
+                            Log.d("tag", item.getString("question"));
+                            challenge = new Challenge2(item.getString("question"), item.getString("image_url"), answers);
+                            challenge.setIsComplete(item.getBoolean("complete"));
+
                         } else if (item.getString("type").equals("COFFEE")) {
                             Log.d("tag", "Have a COFFEE");
 
