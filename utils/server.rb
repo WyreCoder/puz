@@ -111,6 +111,19 @@ get '/api/v1/challenge' do
 
 end
 
+get '/api/v1/leaderboard' do
+
+	users = query('SELECT id, username, score FROM users ORDER BY score DESC LIMIT 15;')
+
+	data = {
+		'success' => 1,
+		'scores' => users
+	}
+
+	json(data)
+
+end
+
 post '/api/v1/challenge/complete' do
 
 	user = authorize!
