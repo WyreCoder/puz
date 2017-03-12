@@ -149,14 +149,14 @@ public class API {
 
     }
 
-    public void loadLeaders (Response.Listener<Leaderboard> callback) {
+    public void loadLeaders (Response.Listener<LeaderboardData> callback) {
 
-        final Response.Listener<Leaderboard> calls = callback;
+        final Response.Listener<LeaderboardData> calls = callback;
         get2("/leaderboard", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
-                Leaderboard lb = new Leaderboard();
+                LeaderboardData lb = new LeaderboardData();
 
                 try {
                     Log.d("tag", response);

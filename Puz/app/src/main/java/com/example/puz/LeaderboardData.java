@@ -3,7 +3,7 @@ package com.example.puz;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Leaderboard<E> {
+public class LeaderboardData<E> {
 
     public class Entry {
         public int id;
