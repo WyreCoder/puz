@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-<<<<<<< HEAD
     /**
      * Response to clicking Challenge 2 button
      * */
@@ -48,6 +47,4 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, FindTheObject.class);
         startActivity(intent);
     }
-=======
->>>>>>> login
 }

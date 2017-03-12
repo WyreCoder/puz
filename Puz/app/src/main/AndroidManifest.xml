@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.puz">
 
-<<<<<<< HEAD
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -10,12 +9,10 @@
     -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-=======
-    <!-- To auto-complete the email text field in the login form with the user's emails -->
+
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
->>>>>>> login
 
     <application
         android:name="com.example.puz.Application"
@@ -35,10 +32,6 @@
         <activity
             android:name=".MainActivity"
             android:parentActivityName=".Menu" />
-        <activity
-            android:name=".Riddle"
-            android:parentActivityName=".MainActivity" />
-<<<<<<< HEAD
         <activity android:name=".TextRiddle"
             android:parentActivityName=".MainActivity" ></activity>
         <!--
@@ -59,10 +52,7 @@
         <activity android:name=".Riddle"
             android:parentActivityName=".MainActivity"></activity>
         <activity android:name=".FindTheObject" android:parentActivityName=".MainActivity"></activity>
-=======
-        <activity android:name=".TextRiddle" />
         <activity android:name=".Menu"></activity>
->>>>>>> login
     </application>
 
 </manifest>
