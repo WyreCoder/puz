@@ -17,8 +17,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Log.d("tag", "Test!");
 
-        Intent intent = new Intent(this, MapsActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(this, MapsActivity.class);
+//        startActivity(intent);
     }
 
 

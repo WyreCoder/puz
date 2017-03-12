@@ -19,7 +19,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/coffeeshop"
+        android:background="@drawable/fb"
         app:layout_constraintHorizontal_bias="0.513"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -29,7 +29,7 @@
 
     <Button
         android:id="@+id/objectBtn"
-        style="@android:style/Widget.DeviceDefault.Button.Borderless"
+        style="@android:style/Widget.Material.Light.Button.Borderless"
         android:layout_width="26dp"
         android:layout_height="29dp"
         android:layout_marginBottom="8dp"
@@ -41,11 +41,11 @@
         android:onClick="itemFound"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/bgImg"
-        app:layout_constraintHorizontal_bias="0.777"
+        app:layout_constraintHorizontal_bias="0.959"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/questionTxt"
-        app:layout_constraintVertical_bias="0.698" />
+        app:layout_constraintVertical_bias="0.96" />
 
     <TextView
         android:id="@+id/questionTxt"
@@ -56,7 +56,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text=""
+        android:text="Find the green pillow!"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="@color/common_google_signin_btn_text_dark_focused"
         app:layout_constraintLeft_toLeftOf="parent"
