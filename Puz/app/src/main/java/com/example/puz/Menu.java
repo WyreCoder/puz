@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 public class Menu extends AppCompatActivity {
 
@@ -17,6 +16,11 @@ public class Menu extends AppCompatActivity {
 
     public void play(View view) {
         Intent intent = new Intent(this, MapsActivity.class);
+        startActivity(intent);
+    }
+
+    public void showScores(View view) {
+        Intent intent = new Intent(this, LeaderBoardActivity.class);
         startActivity(intent);
     }
 }

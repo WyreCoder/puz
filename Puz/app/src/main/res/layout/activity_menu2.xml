@@ -39,6 +39,7 @@
         android:id="@+id/button8"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
+        android:onClick="showScores"
         android:text="@string/action_score_board"
         android:layout_marginRight="16dp"
         app:layout_constraintRight_toRightOf="parent"

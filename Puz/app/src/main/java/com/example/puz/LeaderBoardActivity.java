@@ -4,13 +4,19 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
+import com.android.volley.Response;
+
+import java.util.List;
+
 /**
  * Created by wyre on 12/03/17.
  */
 
-public class LeaderBoard extends AppCompatActivity {
+public class LeaderBoardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_leader_board);
 
         // Load xml components:
@@ -21,15 +27,16 @@ public class LeaderBoard extends AppCompatActivity {
         final TextView leader5Txt = (TextView) findViewById(R.id.leader5Txt);
         final TextView [] txtViews = new TextView [] {leader1Txt, leader2Txt, leader3Txt, leader4Txt, leader5Txt};
 
+        for (int i = 0; i < 5; i++) {
+            txtViews[i].setText("");
+        }
         // Load the leaders from server:
         API.getInstance().loadLeaders(new Response.Listener<LeaderboardData>(){
             @Override
             public void onResponse(LeaderboardData response) {
                 List<LeaderboardData.Entry> scores = response.getScores();
-                for (int view = 0; view < 5; view++) {
-                    if (scores.top()) {
-                        txtViews[view].setText(scores.pop().name);
-                    }
+                for (int view = 0; view < Math.min(5, scores.size()); view++) {
+                    txtViews[view].setText(scores.get(view).name + " (" + scores.get(view).score + ")");
                 }
             }
         });
